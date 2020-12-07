@@ -21,7 +21,7 @@ public class Breakout extends ApplicationAdapter {
 	Texture textureQuadrado;
 	Texture textureWin;
 	int w,h;
-	private int numeroDeQuadrados = 5;
+	private int numeroDeQuadrados = 19;
 	boolean fimDeJogo = false;
 
 
