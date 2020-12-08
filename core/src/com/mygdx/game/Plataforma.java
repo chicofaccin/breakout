@@ -4,8 +4,8 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Texture;
 
-public class Barra extends Actor{
-    Barra(float x, float y, Texture texture, Breakout game) {
+public class Plataforma extends Actor{
+    Plataforma(float x, float y, Texture texture, Breakout game) {
         super(x, y, texture, game);
     }
 

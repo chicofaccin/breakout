@@ -2,11 +2,6 @@ package com.mygdx.game;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.Sprite;
-import com.badlogic.gdx.math.Intersector;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class Quadrado extends Actor{
     private int largura = Gdx.graphics.getWidth();
@@ -21,9 +16,8 @@ public class Quadrado extends Actor{
 
     @Override
     void execute() {
-        if (collide(game.bola)) {
+        if (collide(jogo.bola)) {
             setEliminado(true);
-
         }
     }
 

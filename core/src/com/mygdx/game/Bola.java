@@ -3,12 +3,12 @@ package com.mygdx.game;
 import com.badlogic.gdx.graphics.Texture;
 
 public class Bola extends Actor {
-    private static final int RIGHT = 0;
-    private static final int LEFT = 1;
-    private static final int UP = 2;
-    private static final int DOWN = 3;
-    int norteSul = DOWN;
-    int lesteOeste = LEFT;
+    private static final int DIREITA = 0;
+    private static final int ESQUERDA = 1;
+    private static final int CIMA = 2;
+    private static final int BAIXO = 3;
+    int norteSul = BAIXO;
+    int lesteOeste = ESQUERDA;
 
     private int velocidade = 5;
 
@@ -18,42 +18,45 @@ public class Bola extends Actor {
 
     @Override
     void execute() {
-        if(game.fimDeJogo == true) return;
+        if(jogo.fimDeJogo == true) return;
         movimentoBola();
     }
 
     public void movimentoBola() {
-        if (norteSul == DOWN){
+        if (norteSul == BAIXO){
+            if (sprite.getY() + sprite.getHeight() < 0){
+                jogo.gameOver = true;
+            }
             sprite.translateY(-velocidade);
-            if (lesteOeste == RIGHT){
+            if (lesteOeste == DIREITA){
                 sprite.translateX(velocidade);
-                if(sprite.getX() + sprite.getWidth() > game.w){
-                    lesteOeste = LEFT;
+                if(sprite.getX() + sprite.getWidth() > jogo.w){
+                    lesteOeste = ESQUERDA;
                 }
             }else {
                 sprite.translateX(-velocidade);
                 if (sprite.getX() < 0) {
-                    lesteOeste = RIGHT;
+                    lesteOeste = DIREITA;
                 }
             }
-            if (collide(game.barra)) {
-                norteSul = UP;
+            if (collide(jogo.barra)) {
+                norteSul = CIMA;
             }
-        } else if (norteSul == UP){
+        } else if (norteSul == CIMA){
             sprite.translateY(velocidade);
-            if (lesteOeste == RIGHT){
+            if (lesteOeste == DIREITA){
                 sprite.translateX(velocidade);
-                if(sprite.getX() + sprite.getWidth() > game.w){
-                    lesteOeste = LEFT;
+                if(sprite.getX() + sprite.getWidth() > jogo.w){
+                    lesteOeste = ESQUERDA;
                 }
             }else {
                 sprite.translateX(-velocidade);
                 if (sprite.getX() < 0) {
-                    lesteOeste = RIGHT;
+                    lesteOeste = DIREITA;
                 }
             }
-            if (sprite.getY() + sprite.getHeight() > game.h -150){
-                norteSul = DOWN;
+            if (sprite.getY() + sprite.getHeight() > jogo.h -150){
+                norteSul = BAIXO;
             }
         }
 

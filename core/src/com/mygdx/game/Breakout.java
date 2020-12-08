@@ -11,7 +11,6 @@ import java.util.List;
 
 public class Breakout extends ApplicationAdapter {
 	SpriteBatch batch;
-	Texture backgroud;
 	Actor barra;
 	Bola bola;
 	List<Quadrado> quadrados = new ArrayList<>();
@@ -20,9 +19,11 @@ public class Breakout extends ApplicationAdapter {
 	Texture textureBola;
 	Texture textureQuadrado;
 	Texture textureWin;
+	Texture textureGameOver;
 	int w,h;
 	private int numeroDeQuadrados = 19;
 	boolean fimDeJogo = false;
+	boolean gameOver = false;
 
 
 	@Override
@@ -34,7 +35,8 @@ public class Breakout extends ApplicationAdapter {
 		textureBola = new Texture("bola.png");
 		textureQuadrado = new Texture("quadrado.png");
 		textureWin = new Texture("win.png");
-		barra = new Barra(w / 2f - textureBarra.getWidth() / 2f, 20,textureBarra,this);
+		textureGameOver = new Texture("gameOver.png");
+		barra = new Plataforma(w / 2f - textureBarra.getWidth() / 2f, 20,textureBarra,this);
 		bola = new Bola(w / 2f - textureBola.getWidth() / 2f, 50,textureBola,this);
 		criaQuadrados();
 	}
@@ -62,7 +64,7 @@ public class Breakout extends ApplicationAdapter {
 	void clean() {
 		List<Quadrado> aux = quadrados;
 		quadrados = new ArrayList<>();
-		for (Quadrado a : aux) if (!a.getEliminado()) quadrados.add(a);
+		for (Quadrado quadrado : aux) if (!quadrado.getEliminado()) quadrados.add(quadrado);
 		quadrados.addAll(novosQuadrados);
 		novosQuadrados.clear();
 	}
@@ -75,6 +77,9 @@ public class Breakout extends ApplicationAdapter {
 		batch.begin();
 		barra.draw();
 		bola.draw();
+		if(gameOver){
+			batch.draw(textureGameOver,w / 2f - textureWin.getWidth() / 2f, h / 4f);
+		}
 		if (quadrados.size() == 0) {
 			batch.draw(textureWin, w / 2f - textureWin.getWidth() / 2f, h / 4f);
 			fimDeJogo = true;
